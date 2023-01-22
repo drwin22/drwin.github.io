@@ -1,0 +1,2282 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Prof. Francois Nguyen" />
+
+
+<title>Math 0910: Introduction Algebra</title>
+
+<script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Data Visualisation with R</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="Visualisation.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Math 0910: Introduction Algebra</h1>
+<h4 class="author">Prof. Francois Nguyen</h4>
+<h4 class="date">Spring 2023</h4>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#overview" id="toc-overview">Overview:</a></li>
+<li><a href="#course-requirements" id="toc-course-requirements">Course
+Requirements</a></li>
+<li><a href="#course-objectives" id="toc-course-objectives">Course
+Objectives:</a></li>
+<li><a href="#course-policies" id="toc-course-policies">Course
+Policies:</a>
+<ul>
+<li><a href="#general" id="toc-general">General:</a></li>
+<li><a href="#grade" id="toc-grade">Grade:</a></li>
+</ul></li>
+<li><a href="#assignments" id="toc-assignments">Assignments</a></li>
+<li><a href="#attendance-and-absences"
+id="toc-attendance-and-absences">Attendance and Absences</a></li>
+<li><a href="#academic-honesty-policy-summary"
+id="toc-academic-honesty-policy-summary">Academic Honesty Policy
+Summary:</a></li>
+<li><a href="#college-policy" id="toc-college-policy">College
+Policy</a></li>
+<li><a href="#special-services-and-math-tutoring"
+id="toc-special-services-and-math-tutoring">Special Services and Math
+Tutoring</a></li>
+<li><a href="#online-coursework-integrity-declaration"
+id="toc-online-coursework-integrity-declaration">Online coursework
+Integrity Declaration</a></li>
+<li><a href="#consequences" id="toc-consequences">Consequences</a></li>
+<li><a href="#course-schedule" id="toc-course-schedule">Course
+Schedule</a>
+<ul>
+<li><a href="#week-1-january-9-introduction-to-the-course"
+id="toc-week-1-january-9-introduction-to-the-course">Week 1, January 9:
+Introduction to the Course</a></li>
+<li><a
+href="#week-2-january-16-the-replication-crisis-and-reproducibility"
+id="toc-week-2-january-16-the-replication-crisis-and-reproducibility">Week
+2, January 16: The Replication Crisis and Reproducibility</a></li>
+<li><a href="#week-3-january-23-chapter-03"
+id="toc-week-3-january-23-chapter-03">Week 3, January 23:
+Chapter-03</a></li>
+<li><a href="#week-4-january-30-chapter-04"
+id="toc-week-4-january-30-chapter-04">Week 4, January 30:
+Chapter-04</a></li>
+<li><a href="#week-5-february-6-chapter-05"
+id="toc-week-5-february-6-chapter-05">Week 5, February 6:
+Chapter-05</a></li>
+<li><a href="#week-6-february-13-chapter-06"
+id="toc-week-6-february-13-chapter-06">Week 6, February 13:
+Chapter-06</a></li>
+<li><a href="#week-7-february-20-chapter-07"
+id="toc-week-7-february-20-chapter-07">Week 7, February 20:
+Chapter-07</a></li>
+<li><a href="#week-8-february-27-chapter-08"
+id="toc-week-8-february-27-chapter-08">Week 8, February 27:
+Chapter-08</a></li>
+<li><a href="#week-9-march-6-chapter-09"
+id="toc-week-9-march-6-chapter-09">Week 9, March 6: Chapter-09</a></li>
+<li><a href="#week-10-march-13-chapter-10"
+id="toc-week-10-march-13-chapter-10">Week 10, March 13:
+Chapter-10</a></li>
+<li><a href="#week-11-march-20-chapter-11"
+id="toc-week-11-march-20-chapter-11">Week 11, March 20:
+Chapter-11</a></li>
+<li><a href="#week-12-march-27-chapter-12"
+id="toc-week-12-march-27-chapter-12">Week 12, March 27:
+Chapter-12</a></li>
+<li><a href="#week-13-april-3-chapter-13"
+id="toc-week-13-april-3-chapter-13">Week 13, April 3:
+Chapter-13</a></li>
+<li><a href="#week-14-april-10-chapter-14"
+id="toc-week-14-april-10-chapter-14">Week 14, April 10:
+Chapter-14</a></li>
+<li><a href="#week-15-april-17-chapter-15"
+id="toc-week-15-april-17-chapter-15">Week 15, April 17:
+Chapter-15</a></li>
+<li><a href="#week-16-april-24-chapter-16"
+id="toc-week-16-april-24-chapter-16">Week 16, April 24:
+Chapter-16</a></li>
+</ul></li>
+</ul>
+</div>
+
+<div id="overview" class="section level1">
+<h1>Overview:</h1>
+<p>This course is Introduction to Algebra Online course. The topics
+include real numbers, methods of solving equations and inequalities and
+their applications, exponents and polynomials, factoring polynomials,
+solving quadratic equations and their applications, rational
+expressions, rational exponents and radicals, and graphing functions
+(linear and quadratic).</p>
+<pre class="r"><code># Define the cars vector with 5 values
+cars &lt;- c(1, 3, 6, 4, 9)
+
+# Graph cars using blue points overlayed by a line 
+plot(cars, type=&quot;o&quot;, col=&quot;blue&quot;)
+
+# Create a title with a red, bold/italic font
+title(main=&quot;Autos&quot;, col.main=&quot;red&quot;, font.main=4)</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="course-requirements" class="section level1">
+<h1>Course Requirements</h1>
+<p>A minimum grade of C is required in this course to progress to
+COURSE.</p>
+</div>
+<div id="course-objectives" class="section level1">
+<h1>Course Objectives:</h1>
+<p>At the completion of this course, students will be able to:</p>
+<ul>
+<li>Identify and understand the basic concepts of algebraic
+expressions.</li>
+<li>Perform operations on polynomial and rational expressions.</li>
+<li>Apply the definition of absolute value to solve inequalities and
+equations involving absolute values.</li>
+<li>Find solutions to and graph systems of linear equations and
+inequalities.</li>
+<li>Solve equations involving first and second-degree polynomials and
+rational expressions.</li>
+<li>Manipulate radical expressions using laws of exponents.</li>
+<li>Understand basic properties of functions.</li>
+<li>Apply properties of rational and radical expressions, polynomials,
+and absolute value in the context of real-life</li>
+</ul>
+</div>
+<div id="course-policies" class="section level1">
+<h1>Course Policies:</h1>
+<div id="general" class="section level2">
+<h2>General:</h2>
+<p>– Computers, Calculators are not to be used unless instructed to do
+so. – Quizzes and exams are closed book, closed notes.</p>
+</div>
+<div id="grade" class="section level2">
+<h2>Grade:</h2>
+<p>makeup quizzes or exams will be given.</p>
+<p>– Grades in the C range represent performance that meets
+expectations; Grades in the B range represent performance that is
+substantially better than the expectations; Grades in the A range
+represent work that is excellent.</p>
+<p>– Grades will be maintained in the LMS course shell. Students are
+responsible for tracking their progress by referring to the online
+gradebook.</p>
+</div>
+</div>
+<div id="assignments" class="section level1">
+<h1>Assignments</h1>
+<p>– Students are expected to work independently. Offering and accepting
+solutions from others is an act of plagiarism, which is a serious
+offense and all involved parties will be penalized according to the
+Academic Honesty Policy.</p>
+<p>– Discussion among students is encouraged, but when in doubt, direct
+your questions to the professor, tutor, or lab assistant.</p>
+<p>– No late assignments will be accepted under any circumstances.</p>
+</div>
+<div id="attendance-and-absences" class="section level1">
+<h1>Attendance and Absences</h1>
+<pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
+<div class="figure">
+<img src="index_files/figure-html/attendplot-1.png" alt="A Scatterplot of the Relationship between Class Attendance and Final Grade" width="672" />
+<p class="caption">
+A Scatterplot of the Relationship between Class Attendance and Final
+Grade
+</p>
+</div>
+<p>– Attendance is expected and will be taken each class. You are
+allowed to miss 1 class during the semester without penalty. Any further
+absences will result in point and/or grade deductions.</p>
+<p>– Students are responsible for all missed work, regardless of the
+reason for absence. It is also the absentee’s responsibility to get all
+missing notes or materials.</p>
+</div>
+<div id="academic-honesty-policy-summary" class="section level1">
+<h1>Academic Honesty Policy Summary:</h1>
+<p>In addition to skills and knowledge, Saint Paul College aims to teach
+students appropriate Ethical and Professional Standards of Conduct. The
+Academic Honesty Policy exists to inform students and Faculty of their
+obligations in upholding the highest standards of professional and
+ethical integrity. All student work is subject to the Academic Honesty
+Policy. Professional and Academic practice provides guidance about how
+to properly cite, reference, and attribute the intellectual property of
+others. Any attempt to deceive a faculty member or to help another
+student to do so will be considered a violation of this standard.</p>
+</div>
+<div id="college-policy" class="section level1">
+<h1>College Policy</h1>
+<p>The College’s academic honesty policies can be found in the catalog.
+Please be assured that there will be absolutely no tolerance for
+cheating in any way. All your quizzes and exams must be done
+independently with no help from anyone. Make sure you copy the code of
+honor statement below and send me an email with your name and date of
+the time to confirm you adhere to this course policy: “I will register
+for only one account on Mymathlab.com. My answers to homework, quizzes
+and exams will be my own work (except for assignments that explicitly
+permit collaboration).</p>
+<p>I will not make solutions to homework, quizzes or exams available to
+anyone else. This includes both solutions written by me, as well as any
+official solutions provided by the course instructor. I will not engage
+in any other activities that will dishonestly improve my results or
+dishonestly improve/hurt the results of others. Your name. Dated on
+Jan/…/2023.</p>
+</div>
+<div id="special-services-and-math-tutoring" class="section level1">
+<h1>Special Services and Math Tutoring</h1>
+<p>Special Accommodations: It is college policy to provide reasonable
+accommodations to students with disabilities. Please contact the office
+of Disability Resources and Access if you wish to discuss this policy.
+The Math Center (MC) will be open for drop-in tutoring in room 3125.
+This tutoring is FREE and no appointment is necessary.</p>
+</div>
+<div id="online-coursework-integrity-declaration"
+class="section level1">
+<h1>Online coursework Integrity Declaration</h1>
+<p>Online submission of, or placing one’s name on an exam, assignment,
+or any course document is a statement of academic honor that the student
+has not received or given inappropriate assistance in completing it and
+that the student has complied with the Academic Honesty Policy in that
+work.</p>
+</div>
+<div id="consequences" class="section level1">
+<h1>Consequences</h1>
+<p>An instructor may impose a sanction on the student that varies
+depending upon the instructor’s evaluation of the nature and gravity of
+the offense. Possible sanctions include but are not limited to, the
+following: (1) Require the student to redo the assignment; (2) Require
+the student to complete another assignment; (3) Assign a grade of zero
+to the assignment; (4) Assign a final grade of “F” for the course. A
+student may appeal these decisions according to the Academic Grievance
+Procedure. (See the relevant section in the Student Handbook.) Multiple
+violations of this policy will result in a referral to the Conduct
+Review Board for possible additional sanctions.</p>
+<p>The full text of the Academic Honesty Policy is in the Student
+Handbook.</p>
+</div>
+<div id="course-schedule" class="section level1">
+<h1>Course Schedule</h1>
+<p>(See the addedum)</p>
+<div id="week-1-january-9-introduction-to-the-course"
+class="section level2">
+<h2>Week 1, January 9: Introduction to the Course</h2>
+<p><em>Assignment</em>:</p>
+<ol style="list-style-type: decimal">
+<li><a href="http://happygitwithr.com">Bryan, Jennifer. 2016. Chapters
+1-16.</a> Read this carefully and follow its instructions to get set up
+with , RStudio, Git, and GitHub on your laptop before we meet.</li>
+</ol>
+</div>
+<div id="week-2-january-16-the-replication-crisis-and-reproducibility"
+class="section level2">
+<h2>Week 2, January 16: The Replication Crisis and Reproducibility</h2>
+<p><em>Readings</em>:</p>
+<ol style="list-style-type: decimal">
+<li><a
+href="http://fivethirtyeight.com/features/how-two-grad-students-uncovered-michael-lacour-fraud-and-a-way-to-change-opinions-on-transgender-rights/">Aschwanden,
+Christie, and Maggie Koerth-Baker. 2016. “How Two Grad Students
+Uncovered an Apparent Fraud—and a Way to Change Opinions on Transgender
+Rights.” <em>FiveThirtyEight</em>, April 7</a>, and <a
+href="http://blogs.lse.ac.uk/impactofsocialsciences/2013/04/24/reinhart-rogoff-revisited-why-we-need-open-data-in-economics/">Dimitrova,
+Velichka. 2013. “Reinhart-Rogoff Revisited: Coding Errors Happen—Key
+Problem Was in Not Making the Data Openly Available from the Start.”
+<em>LSE: The Impact Blog</em>, April 24.</a></li>
+<li><a
+href="http://journals.cambridge.org/action/displayAbstract?fromPage=online&amp;aid=9911378&amp;fulltextType=LT&amp;fileId=S2049847015000448">Data
+Access and Research Transparency (DA-RT): A Joint Statement by Political
+Science Journal Editors.</a></li>
+<li><a href="https://ajps.org/ajps-replication-policy/"><em>AJPS</em>
+Replication and Verification Policy</a> and <a
+href="https://ajpsblogging.files.wordpress.com/2015/03/ajps-guide-for-replic-materials-1-0.pdf"><em>American
+Journal of Political Science</em> Guidelines for Preparing Replication
+Files.</a></li>
+<li><a
+href="http://www.stat.columbia.edu/~gelman/research/unpublished/p_hacking.pdf">Gelman,
+Andrew, and Eric Loken. 2013. “The Garden of Forking Paths: Why Multiple
+Comparisons Can Be a Problem, Even When There Is No ‘Fishing Expedition’
+or ‘<em>p</em>-Hacking’ and the Research Hypothesis Was Posited Ahead of
+Time.”</a></li>
+<li><a
+href="http://www.pnas.org.proxy.lib.uiowa.edu/content/112/6/1645">Leek,
+Jeffrey T., and Roger D. Peng. 2015. “Opinion: Reproducibile Research
+Can Still Be Wrong: Adopting a Prevention Approach.” <em>Proceedings of
+the National Academy of Sciences</em> 112(6):1645-1646</a> and <a
+href="http://biorxiv.org/content/biorxiv/early/2016/07/29/066803.full.pdf">Patil,
+Prasad, Roger D. Peng, and Jeffrey T. Leek. 2016. “A Statistical
+Definition for Reproducibility and Replicability.” <em>bioRxiv</em>,
+July 29.</a></li>
+</ol>
+</div>
+<div id="week-3-january-23-chapter-03" class="section level2">
+<h2>Week 3, January 23: Chapter-03</h2>
+<p><em>Assignment</em>:</p>
+<ol style="list-style-type: decimal">
+<li><a href="http://happygitwithr.com">Bryan, Jennifer. 2016. Chapters
+1-16.</a> Read this carefully and follow its instructions to get set up
+with , RStudio, Git, and GitHub on your laptop before we meet.</li>
+</ol>
+</div>
+<div id="week-4-january-30-chapter-04" class="section level2">
+<h2>Week 4, January 30: Chapter-04</h2>
+<p><em>Readings</em>:</p>
+<ol style="list-style-type: decimal">
+<li><a href="http://happygitwithr.com">Bryan, Jennifer. 2016. Chapters
+1-16.</a> Read this carefully and follow its instructions to get set up
+with , RStudio, Git, and GitHub on your laptop before we meet.</li>
+<li><a href="http://happygitwithr.com">Bryan, Jennifer. 2016. Chapters
+1-16.</a> Read this carefully and follow its instructions to get set up
+with , RStudio, Git, and GitHub on your laptop before we meet.</li>
+</ol>
+</div>
+<div id="week-5-february-6-chapter-05" class="section level2">
+<h2>Week 5, February 6: Chapter-05</h2>
+<p><em>Readings</em>:</p>
+<ol style="list-style-type: decimal">
+<li><a href="http://happygitwithr.com">Bryan, Jennifer. 2016. Chapters
+1-16.</a> Read this carefully and follow its instructions to get set up
+with , RStudio, Git, and GitHub on your laptop before we meet.</li>
+</ol>
+</div>
+<div id="week-6-february-13-chapter-06" class="section level2">
+<h2>Week 6, February 13: Chapter-06</h2>
+<p><em>Readings</em>: <a href="http://happygitwithr.com">Bryan,
+Jennifer. 2016. Chapters 1-16.</a> Read this carefully and follow its
+instructions to get set up with , RStudio, Git, and GitHub on your
+laptop before we meet.</p>
+</div>
+<div id="week-7-february-20-chapter-07" class="section level2">
+<h2>Week 7, February 20: Chapter-07</h2>
+<p><em>Readings</em>: <a href="http://happygitwithr.com">Bryan,
+Jennifer. 2016. Chapters 1-16.</a> Read this carefully and follow its
+instructions to get set up with , RStudio, Git, and GitHub on your
+laptop before we meet.</p>
+</div>
+<div id="week-8-february-27-chapter-08" class="section level2">
+<h2>Week 8, February 27: Chapter-08</h2>
+<p><em>Readings</em>: <a href="http://happygitwithr.com">Bryan,
+Jennifer. 2016. Chapters 1-16.</a> Read this carefully and follow its
+instructions to get set up with , RStudio, Git, and GitHub on your
+laptop before we meet.</p>
+</div>
+<div id="week-9-march-6-chapter-09" class="section level2">
+<h2>Week 9, March 6: Chapter-09</h2>
+</div>
+<div id="week-10-march-13-chapter-10" class="section level2">
+<h2>Week 10, March 13: Chapter-10</h2>
+</div>
+<div id="week-11-march-20-chapter-11" class="section level2">
+<h2>Week 11, March 20: Chapter-11</h2>
+</div>
+<div id="week-12-march-27-chapter-12" class="section level2">
+<h2>Week 12, March 27: Chapter-12</h2>
+</div>
+<div id="week-13-april-3-chapter-13" class="section level2">
+<h2>Week 13, April 3: Chapter-13</h2>
+</div>
+<div id="week-14-april-10-chapter-14" class="section level2">
+<h2>Week 14, April 10: Chapter-14</h2>
+</div>
+<div id="week-15-april-17-chapter-15" class="section level2">
+<h2>Week 15, April 17: Chapter-15</h2>
+</div>
+<div id="week-16-april-24-chapter-16" class="section level2">
+<h2>Week 16, April 24: Chapter-16</h2>
+<center>
+<img src="https://media.glassdoor.com/l/468324/dunwoody-college-office.jpg">
+</center>
+<pre class="r"><code># devtools::install_github(&quot;rstudio/gt&quot;)
+library(gt)
+head(mtcars)</code></pre>
+<pre><code>##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
+<pre class="r"><code>df=mtcars
+df %&gt;%gt()</code></pre>
+<div id="ylxyhjampt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#ylxyhjampt .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ylxyhjampt .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ylxyhjampt .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ylxyhjampt .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ylxyhjampt .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ylxyhjampt .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ylxyhjampt .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ylxyhjampt .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ylxyhjampt .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ylxyhjampt .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ylxyhjampt .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ylxyhjampt .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ylxyhjampt .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ylxyhjampt .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ylxyhjampt .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ylxyhjampt .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ylxyhjampt .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ylxyhjampt .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ylxyhjampt .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ylxyhjampt .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ylxyhjampt .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ylxyhjampt .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ylxyhjampt .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ylxyhjampt .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ylxyhjampt .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ylxyhjampt .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ylxyhjampt .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ylxyhjampt .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ylxyhjampt .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ylxyhjampt .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ylxyhjampt .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ylxyhjampt .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ylxyhjampt .gt_left {
+  text-align: left;
+}
+
+#ylxyhjampt .gt_center {
+  text-align: center;
+}
+
+#ylxyhjampt .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ylxyhjampt .gt_font_normal {
+  font-weight: normal;
+}
+
+#ylxyhjampt .gt_font_bold {
+  font-weight: bold;
+}
+
+#ylxyhjampt .gt_font_italic {
+  font-style: italic;
+}
+
+#ylxyhjampt .gt_super {
+  font-size: 65%;
+}
+
+#ylxyhjampt .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#ylxyhjampt .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ylxyhjampt .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ylxyhjampt .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ylxyhjampt .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ylxyhjampt .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ylxyhjampt .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="mpg">mpg</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="cyl">cyl</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="disp">disp</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="hp">hp</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="drat">drat</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="wt">wt</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="qsec">qsec</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="vs">vs</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="am">am</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="gear">gear</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="carb">carb</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="mpg" class="gt_row gt_right">21.0</td>
+<td headers="cyl" class="gt_row gt_right">6</td>
+<td headers="disp" class="gt_row gt_right">160.0</td>
+<td headers="hp" class="gt_row gt_right">110</td>
+<td headers="drat" class="gt_row gt_right">3.90</td>
+<td headers="wt" class="gt_row gt_right">2.620</td>
+<td headers="qsec" class="gt_row gt_right">16.46</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">1</td>
+<td headers="gear" class="gt_row gt_right">4</td>
+<td headers="carb" class="gt_row gt_right">4</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">21.0</td>
+<td headers="cyl" class="gt_row gt_right">6</td>
+<td headers="disp" class="gt_row gt_right">160.0</td>
+<td headers="hp" class="gt_row gt_right">110</td>
+<td headers="drat" class="gt_row gt_right">3.90</td>
+<td headers="wt" class="gt_row gt_right">2.875</td>
+<td headers="qsec" class="gt_row gt_right">17.02</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">1</td>
+<td headers="gear" class="gt_row gt_right">4</td>
+<td headers="carb" class="gt_row gt_right">4</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">22.8</td>
+<td headers="cyl" class="gt_row gt_right">4</td>
+<td headers="disp" class="gt_row gt_right">108.0</td>
+<td headers="hp" class="gt_row gt_right">93</td>
+<td headers="drat" class="gt_row gt_right">3.85</td>
+<td headers="wt" class="gt_row gt_right">2.320</td>
+<td headers="qsec" class="gt_row gt_right">18.61</td>
+<td headers="vs" class="gt_row gt_right">1</td>
+<td headers="am" class="gt_row gt_right">1</td>
+<td headers="gear" class="gt_row gt_right">4</td>
+<td headers="carb" class="gt_row gt_right">1</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">21.4</td>
+<td headers="cyl" class="gt_row gt_right">6</td>
+<td headers="disp" class="gt_row gt_right">258.0</td>
+<td headers="hp" class="gt_row gt_right">110</td>
+<td headers="drat" class="gt_row gt_right">3.08</td>
+<td headers="wt" class="gt_row gt_right">3.215</td>
+<td headers="qsec" class="gt_row gt_right">19.44</td>
+<td headers="vs" class="gt_row gt_right">1</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">3</td>
+<td headers="carb" class="gt_row gt_right">1</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">18.7</td>
+<td headers="cyl" class="gt_row gt_right">8</td>
+<td headers="disp" class="gt_row gt_right">360.0</td>
+<td headers="hp" class="gt_row gt_right">175</td>
+<td headers="drat" class="gt_row gt_right">3.15</td>
+<td headers="wt" class="gt_row gt_right">3.440</td>
+<td headers="qsec" class="gt_row gt_right">17.02</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">3</td>
+<td headers="carb" class="gt_row gt_right">2</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">18.1</td>
+<td headers="cyl" class="gt_row gt_right">6</td>
+<td headers="disp" class="gt_row gt_right">225.0</td>
+<td headers="hp" class="gt_row gt_right">105</td>
+<td headers="drat" class="gt_row gt_right">2.76</td>
+<td headers="wt" class="gt_row gt_right">3.460</td>
+<td headers="qsec" class="gt_row gt_right">20.22</td>
+<td headers="vs" class="gt_row gt_right">1</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">3</td>
+<td headers="carb" class="gt_row gt_right">1</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">14.3</td>
+<td headers="cyl" class="gt_row gt_right">8</td>
+<td headers="disp" class="gt_row gt_right">360.0</td>
+<td headers="hp" class="gt_row gt_right">245</td>
+<td headers="drat" class="gt_row gt_right">3.21</td>
+<td headers="wt" class="gt_row gt_right">3.570</td>
+<td headers="qsec" class="gt_row gt_right">15.84</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">3</td>
+<td headers="carb" class="gt_row gt_right">4</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">24.4</td>
+<td headers="cyl" class="gt_row gt_right">4</td>
+<td headers="disp" class="gt_row gt_right">146.7</td>
+<td headers="hp" class="gt_row gt_right">62</td>
+<td headers="drat" class="gt_row gt_right">3.69</td>
+<td headers="wt" class="gt_row gt_right">3.190</td>
+<td headers="qsec" class="gt_row gt_right">20.00</td>
+<td headers="vs" class="gt_row gt_right">1</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">4</td>
+<td headers="carb" class="gt_row gt_right">2</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">22.8</td>
+<td headers="cyl" class="gt_row gt_right">4</td>
+<td headers="disp" class="gt_row gt_right">140.8</td>
+<td headers="hp" class="gt_row gt_right">95</td>
+<td headers="drat" class="gt_row gt_right">3.92</td>
+<td headers="wt" class="gt_row gt_right">3.150</td>
+<td headers="qsec" class="gt_row gt_right">22.90</td>
+<td headers="vs" class="gt_row gt_right">1</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">4</td>
+<td headers="carb" class="gt_row gt_right">2</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">19.2</td>
+<td headers="cyl" class="gt_row gt_right">6</td>
+<td headers="disp" class="gt_row gt_right">167.6</td>
+<td headers="hp" class="gt_row gt_right">123</td>
+<td headers="drat" class="gt_row gt_right">3.92</td>
+<td headers="wt" class="gt_row gt_right">3.440</td>
+<td headers="qsec" class="gt_row gt_right">18.30</td>
+<td headers="vs" class="gt_row gt_right">1</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">4</td>
+<td headers="carb" class="gt_row gt_right">4</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">17.8</td>
+<td headers="cyl" class="gt_row gt_right">6</td>
+<td headers="disp" class="gt_row gt_right">167.6</td>
+<td headers="hp" class="gt_row gt_right">123</td>
+<td headers="drat" class="gt_row gt_right">3.92</td>
+<td headers="wt" class="gt_row gt_right">3.440</td>
+<td headers="qsec" class="gt_row gt_right">18.90</td>
+<td headers="vs" class="gt_row gt_right">1</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">4</td>
+<td headers="carb" class="gt_row gt_right">4</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">16.4</td>
+<td headers="cyl" class="gt_row gt_right">8</td>
+<td headers="disp" class="gt_row gt_right">275.8</td>
+<td headers="hp" class="gt_row gt_right">180</td>
+<td headers="drat" class="gt_row gt_right">3.07</td>
+<td headers="wt" class="gt_row gt_right">4.070</td>
+<td headers="qsec" class="gt_row gt_right">17.40</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">3</td>
+<td headers="carb" class="gt_row gt_right">3</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">17.3</td>
+<td headers="cyl" class="gt_row gt_right">8</td>
+<td headers="disp" class="gt_row gt_right">275.8</td>
+<td headers="hp" class="gt_row gt_right">180</td>
+<td headers="drat" class="gt_row gt_right">3.07</td>
+<td headers="wt" class="gt_row gt_right">3.730</td>
+<td headers="qsec" class="gt_row gt_right">17.60</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">3</td>
+<td headers="carb" class="gt_row gt_right">3</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">15.2</td>
+<td headers="cyl" class="gt_row gt_right">8</td>
+<td headers="disp" class="gt_row gt_right">275.8</td>
+<td headers="hp" class="gt_row gt_right">180</td>
+<td headers="drat" class="gt_row gt_right">3.07</td>
+<td headers="wt" class="gt_row gt_right">3.780</td>
+<td headers="qsec" class="gt_row gt_right">18.00</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">3</td>
+<td headers="carb" class="gt_row gt_right">3</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">10.4</td>
+<td headers="cyl" class="gt_row gt_right">8</td>
+<td headers="disp" class="gt_row gt_right">472.0</td>
+<td headers="hp" class="gt_row gt_right">205</td>
+<td headers="drat" class="gt_row gt_right">2.93</td>
+<td headers="wt" class="gt_row gt_right">5.250</td>
+<td headers="qsec" class="gt_row gt_right">17.98</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">3</td>
+<td headers="carb" class="gt_row gt_right">4</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">10.4</td>
+<td headers="cyl" class="gt_row gt_right">8</td>
+<td headers="disp" class="gt_row gt_right">460.0</td>
+<td headers="hp" class="gt_row gt_right">215</td>
+<td headers="drat" class="gt_row gt_right">3.00</td>
+<td headers="wt" class="gt_row gt_right">5.424</td>
+<td headers="qsec" class="gt_row gt_right">17.82</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">3</td>
+<td headers="carb" class="gt_row gt_right">4</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">14.7</td>
+<td headers="cyl" class="gt_row gt_right">8</td>
+<td headers="disp" class="gt_row gt_right">440.0</td>
+<td headers="hp" class="gt_row gt_right">230</td>
+<td headers="drat" class="gt_row gt_right">3.23</td>
+<td headers="wt" class="gt_row gt_right">5.345</td>
+<td headers="qsec" class="gt_row gt_right">17.42</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">3</td>
+<td headers="carb" class="gt_row gt_right">4</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">32.4</td>
+<td headers="cyl" class="gt_row gt_right">4</td>
+<td headers="disp" class="gt_row gt_right">78.7</td>
+<td headers="hp" class="gt_row gt_right">66</td>
+<td headers="drat" class="gt_row gt_right">4.08</td>
+<td headers="wt" class="gt_row gt_right">2.200</td>
+<td headers="qsec" class="gt_row gt_right">19.47</td>
+<td headers="vs" class="gt_row gt_right">1</td>
+<td headers="am" class="gt_row gt_right">1</td>
+<td headers="gear" class="gt_row gt_right">4</td>
+<td headers="carb" class="gt_row gt_right">1</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">30.4</td>
+<td headers="cyl" class="gt_row gt_right">4</td>
+<td headers="disp" class="gt_row gt_right">75.7</td>
+<td headers="hp" class="gt_row gt_right">52</td>
+<td headers="drat" class="gt_row gt_right">4.93</td>
+<td headers="wt" class="gt_row gt_right">1.615</td>
+<td headers="qsec" class="gt_row gt_right">18.52</td>
+<td headers="vs" class="gt_row gt_right">1</td>
+<td headers="am" class="gt_row gt_right">1</td>
+<td headers="gear" class="gt_row gt_right">4</td>
+<td headers="carb" class="gt_row gt_right">2</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">33.9</td>
+<td headers="cyl" class="gt_row gt_right">4</td>
+<td headers="disp" class="gt_row gt_right">71.1</td>
+<td headers="hp" class="gt_row gt_right">65</td>
+<td headers="drat" class="gt_row gt_right">4.22</td>
+<td headers="wt" class="gt_row gt_right">1.835</td>
+<td headers="qsec" class="gt_row gt_right">19.90</td>
+<td headers="vs" class="gt_row gt_right">1</td>
+<td headers="am" class="gt_row gt_right">1</td>
+<td headers="gear" class="gt_row gt_right">4</td>
+<td headers="carb" class="gt_row gt_right">1</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">21.5</td>
+<td headers="cyl" class="gt_row gt_right">4</td>
+<td headers="disp" class="gt_row gt_right">120.1</td>
+<td headers="hp" class="gt_row gt_right">97</td>
+<td headers="drat" class="gt_row gt_right">3.70</td>
+<td headers="wt" class="gt_row gt_right">2.465</td>
+<td headers="qsec" class="gt_row gt_right">20.01</td>
+<td headers="vs" class="gt_row gt_right">1</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">3</td>
+<td headers="carb" class="gt_row gt_right">1</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">15.5</td>
+<td headers="cyl" class="gt_row gt_right">8</td>
+<td headers="disp" class="gt_row gt_right">318.0</td>
+<td headers="hp" class="gt_row gt_right">150</td>
+<td headers="drat" class="gt_row gt_right">2.76</td>
+<td headers="wt" class="gt_row gt_right">3.520</td>
+<td headers="qsec" class="gt_row gt_right">16.87</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">3</td>
+<td headers="carb" class="gt_row gt_right">2</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">15.2</td>
+<td headers="cyl" class="gt_row gt_right">8</td>
+<td headers="disp" class="gt_row gt_right">304.0</td>
+<td headers="hp" class="gt_row gt_right">150</td>
+<td headers="drat" class="gt_row gt_right">3.15</td>
+<td headers="wt" class="gt_row gt_right">3.435</td>
+<td headers="qsec" class="gt_row gt_right">17.30</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">3</td>
+<td headers="carb" class="gt_row gt_right">2</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">13.3</td>
+<td headers="cyl" class="gt_row gt_right">8</td>
+<td headers="disp" class="gt_row gt_right">350.0</td>
+<td headers="hp" class="gt_row gt_right">245</td>
+<td headers="drat" class="gt_row gt_right">3.73</td>
+<td headers="wt" class="gt_row gt_right">3.840</td>
+<td headers="qsec" class="gt_row gt_right">15.41</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">3</td>
+<td headers="carb" class="gt_row gt_right">4</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">19.2</td>
+<td headers="cyl" class="gt_row gt_right">8</td>
+<td headers="disp" class="gt_row gt_right">400.0</td>
+<td headers="hp" class="gt_row gt_right">175</td>
+<td headers="drat" class="gt_row gt_right">3.08</td>
+<td headers="wt" class="gt_row gt_right">3.845</td>
+<td headers="qsec" class="gt_row gt_right">17.05</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">3</td>
+<td headers="carb" class="gt_row gt_right">2</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">27.3</td>
+<td headers="cyl" class="gt_row gt_right">4</td>
+<td headers="disp" class="gt_row gt_right">79.0</td>
+<td headers="hp" class="gt_row gt_right">66</td>
+<td headers="drat" class="gt_row gt_right">4.08</td>
+<td headers="wt" class="gt_row gt_right">1.935</td>
+<td headers="qsec" class="gt_row gt_right">18.90</td>
+<td headers="vs" class="gt_row gt_right">1</td>
+<td headers="am" class="gt_row gt_right">1</td>
+<td headers="gear" class="gt_row gt_right">4</td>
+<td headers="carb" class="gt_row gt_right">1</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">26.0</td>
+<td headers="cyl" class="gt_row gt_right">4</td>
+<td headers="disp" class="gt_row gt_right">120.3</td>
+<td headers="hp" class="gt_row gt_right">91</td>
+<td headers="drat" class="gt_row gt_right">4.43</td>
+<td headers="wt" class="gt_row gt_right">2.140</td>
+<td headers="qsec" class="gt_row gt_right">16.70</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">1</td>
+<td headers="gear" class="gt_row gt_right">5</td>
+<td headers="carb" class="gt_row gt_right">2</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">30.4</td>
+<td headers="cyl" class="gt_row gt_right">4</td>
+<td headers="disp" class="gt_row gt_right">95.1</td>
+<td headers="hp" class="gt_row gt_right">113</td>
+<td headers="drat" class="gt_row gt_right">3.77</td>
+<td headers="wt" class="gt_row gt_right">1.513</td>
+<td headers="qsec" class="gt_row gt_right">16.90</td>
+<td headers="vs" class="gt_row gt_right">1</td>
+<td headers="am" class="gt_row gt_right">1</td>
+<td headers="gear" class="gt_row gt_right">5</td>
+<td headers="carb" class="gt_row gt_right">2</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">15.8</td>
+<td headers="cyl" class="gt_row gt_right">8</td>
+<td headers="disp" class="gt_row gt_right">351.0</td>
+<td headers="hp" class="gt_row gt_right">264</td>
+<td headers="drat" class="gt_row gt_right">4.22</td>
+<td headers="wt" class="gt_row gt_right">3.170</td>
+<td headers="qsec" class="gt_row gt_right">14.50</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">1</td>
+<td headers="gear" class="gt_row gt_right">5</td>
+<td headers="carb" class="gt_row gt_right">4</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">19.7</td>
+<td headers="cyl" class="gt_row gt_right">6</td>
+<td headers="disp" class="gt_row gt_right">145.0</td>
+<td headers="hp" class="gt_row gt_right">175</td>
+<td headers="drat" class="gt_row gt_right">3.62</td>
+<td headers="wt" class="gt_row gt_right">2.770</td>
+<td headers="qsec" class="gt_row gt_right">15.50</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">1</td>
+<td headers="gear" class="gt_row gt_right">5</td>
+<td headers="carb" class="gt_row gt_right">6</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">15.0</td>
+<td headers="cyl" class="gt_row gt_right">8</td>
+<td headers="disp" class="gt_row gt_right">301.0</td>
+<td headers="hp" class="gt_row gt_right">335</td>
+<td headers="drat" class="gt_row gt_right">3.54</td>
+<td headers="wt" class="gt_row gt_right">3.570</td>
+<td headers="qsec" class="gt_row gt_right">14.60</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">1</td>
+<td headers="gear" class="gt_row gt_right">5</td>
+<td headers="carb" class="gt_row gt_right">8</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right">21.4</td>
+<td headers="cyl" class="gt_row gt_right">4</td>
+<td headers="disp" class="gt_row gt_right">121.0</td>
+<td headers="hp" class="gt_row gt_right">109</td>
+<td headers="drat" class="gt_row gt_right">4.11</td>
+<td headers="wt" class="gt_row gt_right">2.780</td>
+<td headers="qsec" class="gt_row gt_right">18.60</td>
+<td headers="vs" class="gt_row gt_right">1</td>
+<td headers="am" class="gt_row gt_right">1</td>
+<td headers="gear" class="gt_row gt_right">4</td>
+<td headers="carb" class="gt_row gt_right">2</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+<pre class="r"><code>df %&gt;%gt() %&gt;%
+tab_header(title = &quot;mtcars dataset&quot;) %&gt;%
+tab_style(
+style = list(cell_fill(color = &quot;#b2f7ef&quot;),
+cell_text(weight = &quot;bold&quot;)),
+locations = cells_body(columns = mpg))%&gt;%
+tab_style(
+style = list(cell_fill(color = &quot;#ffefb5&quot;),
+cell_text(weight = &quot;bold&quot;)), 
+locations = cells_body(columns = hp))</code></pre>
+<div id="kquzfppabu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#kquzfppabu .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#kquzfppabu .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#kquzfppabu .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#kquzfppabu .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#kquzfppabu .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#kquzfppabu .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kquzfppabu .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#kquzfppabu .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#kquzfppabu .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#kquzfppabu .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#kquzfppabu .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#kquzfppabu .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#kquzfppabu .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#kquzfppabu .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#kquzfppabu .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#kquzfppabu .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#kquzfppabu .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#kquzfppabu .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kquzfppabu .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#kquzfppabu .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#kquzfppabu .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kquzfppabu .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#kquzfppabu .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#kquzfppabu .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kquzfppabu .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kquzfppabu .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#kquzfppabu .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#kquzfppabu .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kquzfppabu .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#kquzfppabu .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kquzfppabu .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#kquzfppabu .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kquzfppabu .gt_left {
+  text-align: left;
+}
+
+#kquzfppabu .gt_center {
+  text-align: center;
+}
+
+#kquzfppabu .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#kquzfppabu .gt_font_normal {
+  font-weight: normal;
+}
+
+#kquzfppabu .gt_font_bold {
+  font-weight: bold;
+}
+
+#kquzfppabu .gt_font_italic {
+  font-style: italic;
+}
+
+#kquzfppabu .gt_super {
+  font-size: 65%;
+}
+
+#kquzfppabu .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#kquzfppabu .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#kquzfppabu .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#kquzfppabu .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#kquzfppabu .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#kquzfppabu .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#kquzfppabu .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <td colspan="11" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>mtcars dataset</td>
+    </tr>
+    
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="mpg">mpg</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="cyl">cyl</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="disp">disp</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="hp">hp</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="drat">drat</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="wt">wt</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="qsec">qsec</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="vs">vs</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="am">am</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="gear">gear</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="carb">carb</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">21.0</td>
+<td headers="cyl" class="gt_row gt_right">6</td>
+<td headers="disp" class="gt_row gt_right">160.0</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">110</td>
+<td headers="drat" class="gt_row gt_right">3.90</td>
+<td headers="wt" class="gt_row gt_right">2.620</td>
+<td headers="qsec" class="gt_row gt_right">16.46</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">1</td>
+<td headers="gear" class="gt_row gt_right">4</td>
+<td headers="carb" class="gt_row gt_right">4</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">21.0</td>
+<td headers="cyl" class="gt_row gt_right">6</td>
+<td headers="disp" class="gt_row gt_right">160.0</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">110</td>
+<td headers="drat" class="gt_row gt_right">3.90</td>
+<td headers="wt" class="gt_row gt_right">2.875</td>
+<td headers="qsec" class="gt_row gt_right">17.02</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">1</td>
+<td headers="gear" class="gt_row gt_right">4</td>
+<td headers="carb" class="gt_row gt_right">4</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">22.8</td>
+<td headers="cyl" class="gt_row gt_right">4</td>
+<td headers="disp" class="gt_row gt_right">108.0</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">93</td>
+<td headers="drat" class="gt_row gt_right">3.85</td>
+<td headers="wt" class="gt_row gt_right">2.320</td>
+<td headers="qsec" class="gt_row gt_right">18.61</td>
+<td headers="vs" class="gt_row gt_right">1</td>
+<td headers="am" class="gt_row gt_right">1</td>
+<td headers="gear" class="gt_row gt_right">4</td>
+<td headers="carb" class="gt_row gt_right">1</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">21.4</td>
+<td headers="cyl" class="gt_row gt_right">6</td>
+<td headers="disp" class="gt_row gt_right">258.0</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">110</td>
+<td headers="drat" class="gt_row gt_right">3.08</td>
+<td headers="wt" class="gt_row gt_right">3.215</td>
+<td headers="qsec" class="gt_row gt_right">19.44</td>
+<td headers="vs" class="gt_row gt_right">1</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">3</td>
+<td headers="carb" class="gt_row gt_right">1</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">18.7</td>
+<td headers="cyl" class="gt_row gt_right">8</td>
+<td headers="disp" class="gt_row gt_right">360.0</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">175</td>
+<td headers="drat" class="gt_row gt_right">3.15</td>
+<td headers="wt" class="gt_row gt_right">3.440</td>
+<td headers="qsec" class="gt_row gt_right">17.02</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">3</td>
+<td headers="carb" class="gt_row gt_right">2</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">18.1</td>
+<td headers="cyl" class="gt_row gt_right">6</td>
+<td headers="disp" class="gt_row gt_right">225.0</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">105</td>
+<td headers="drat" class="gt_row gt_right">2.76</td>
+<td headers="wt" class="gt_row gt_right">3.460</td>
+<td headers="qsec" class="gt_row gt_right">20.22</td>
+<td headers="vs" class="gt_row gt_right">1</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">3</td>
+<td headers="carb" class="gt_row gt_right">1</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">14.3</td>
+<td headers="cyl" class="gt_row gt_right">8</td>
+<td headers="disp" class="gt_row gt_right">360.0</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">245</td>
+<td headers="drat" class="gt_row gt_right">3.21</td>
+<td headers="wt" class="gt_row gt_right">3.570</td>
+<td headers="qsec" class="gt_row gt_right">15.84</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">3</td>
+<td headers="carb" class="gt_row gt_right">4</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">24.4</td>
+<td headers="cyl" class="gt_row gt_right">4</td>
+<td headers="disp" class="gt_row gt_right">146.7</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">62</td>
+<td headers="drat" class="gt_row gt_right">3.69</td>
+<td headers="wt" class="gt_row gt_right">3.190</td>
+<td headers="qsec" class="gt_row gt_right">20.00</td>
+<td headers="vs" class="gt_row gt_right">1</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">4</td>
+<td headers="carb" class="gt_row gt_right">2</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">22.8</td>
+<td headers="cyl" class="gt_row gt_right">4</td>
+<td headers="disp" class="gt_row gt_right">140.8</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">95</td>
+<td headers="drat" class="gt_row gt_right">3.92</td>
+<td headers="wt" class="gt_row gt_right">3.150</td>
+<td headers="qsec" class="gt_row gt_right">22.90</td>
+<td headers="vs" class="gt_row gt_right">1</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">4</td>
+<td headers="carb" class="gt_row gt_right">2</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">19.2</td>
+<td headers="cyl" class="gt_row gt_right">6</td>
+<td headers="disp" class="gt_row gt_right">167.6</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">123</td>
+<td headers="drat" class="gt_row gt_right">3.92</td>
+<td headers="wt" class="gt_row gt_right">3.440</td>
+<td headers="qsec" class="gt_row gt_right">18.30</td>
+<td headers="vs" class="gt_row gt_right">1</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">4</td>
+<td headers="carb" class="gt_row gt_right">4</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">17.8</td>
+<td headers="cyl" class="gt_row gt_right">6</td>
+<td headers="disp" class="gt_row gt_right">167.6</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">123</td>
+<td headers="drat" class="gt_row gt_right">3.92</td>
+<td headers="wt" class="gt_row gt_right">3.440</td>
+<td headers="qsec" class="gt_row gt_right">18.90</td>
+<td headers="vs" class="gt_row gt_right">1</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">4</td>
+<td headers="carb" class="gt_row gt_right">4</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">16.4</td>
+<td headers="cyl" class="gt_row gt_right">8</td>
+<td headers="disp" class="gt_row gt_right">275.8</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">180</td>
+<td headers="drat" class="gt_row gt_right">3.07</td>
+<td headers="wt" class="gt_row gt_right">4.070</td>
+<td headers="qsec" class="gt_row gt_right">17.40</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">3</td>
+<td headers="carb" class="gt_row gt_right">3</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">17.3</td>
+<td headers="cyl" class="gt_row gt_right">8</td>
+<td headers="disp" class="gt_row gt_right">275.8</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">180</td>
+<td headers="drat" class="gt_row gt_right">3.07</td>
+<td headers="wt" class="gt_row gt_right">3.730</td>
+<td headers="qsec" class="gt_row gt_right">17.60</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">3</td>
+<td headers="carb" class="gt_row gt_right">3</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">15.2</td>
+<td headers="cyl" class="gt_row gt_right">8</td>
+<td headers="disp" class="gt_row gt_right">275.8</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">180</td>
+<td headers="drat" class="gt_row gt_right">3.07</td>
+<td headers="wt" class="gt_row gt_right">3.780</td>
+<td headers="qsec" class="gt_row gt_right">18.00</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">3</td>
+<td headers="carb" class="gt_row gt_right">3</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">10.4</td>
+<td headers="cyl" class="gt_row gt_right">8</td>
+<td headers="disp" class="gt_row gt_right">472.0</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">205</td>
+<td headers="drat" class="gt_row gt_right">2.93</td>
+<td headers="wt" class="gt_row gt_right">5.250</td>
+<td headers="qsec" class="gt_row gt_right">17.98</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">3</td>
+<td headers="carb" class="gt_row gt_right">4</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">10.4</td>
+<td headers="cyl" class="gt_row gt_right">8</td>
+<td headers="disp" class="gt_row gt_right">460.0</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">215</td>
+<td headers="drat" class="gt_row gt_right">3.00</td>
+<td headers="wt" class="gt_row gt_right">5.424</td>
+<td headers="qsec" class="gt_row gt_right">17.82</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">3</td>
+<td headers="carb" class="gt_row gt_right">4</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">14.7</td>
+<td headers="cyl" class="gt_row gt_right">8</td>
+<td headers="disp" class="gt_row gt_right">440.0</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">230</td>
+<td headers="drat" class="gt_row gt_right">3.23</td>
+<td headers="wt" class="gt_row gt_right">5.345</td>
+<td headers="qsec" class="gt_row gt_right">17.42</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">3</td>
+<td headers="carb" class="gt_row gt_right">4</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">32.4</td>
+<td headers="cyl" class="gt_row gt_right">4</td>
+<td headers="disp" class="gt_row gt_right">78.7</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">66</td>
+<td headers="drat" class="gt_row gt_right">4.08</td>
+<td headers="wt" class="gt_row gt_right">2.200</td>
+<td headers="qsec" class="gt_row gt_right">19.47</td>
+<td headers="vs" class="gt_row gt_right">1</td>
+<td headers="am" class="gt_row gt_right">1</td>
+<td headers="gear" class="gt_row gt_right">4</td>
+<td headers="carb" class="gt_row gt_right">1</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">30.4</td>
+<td headers="cyl" class="gt_row gt_right">4</td>
+<td headers="disp" class="gt_row gt_right">75.7</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">52</td>
+<td headers="drat" class="gt_row gt_right">4.93</td>
+<td headers="wt" class="gt_row gt_right">1.615</td>
+<td headers="qsec" class="gt_row gt_right">18.52</td>
+<td headers="vs" class="gt_row gt_right">1</td>
+<td headers="am" class="gt_row gt_right">1</td>
+<td headers="gear" class="gt_row gt_right">4</td>
+<td headers="carb" class="gt_row gt_right">2</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">33.9</td>
+<td headers="cyl" class="gt_row gt_right">4</td>
+<td headers="disp" class="gt_row gt_right">71.1</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">65</td>
+<td headers="drat" class="gt_row gt_right">4.22</td>
+<td headers="wt" class="gt_row gt_right">1.835</td>
+<td headers="qsec" class="gt_row gt_right">19.90</td>
+<td headers="vs" class="gt_row gt_right">1</td>
+<td headers="am" class="gt_row gt_right">1</td>
+<td headers="gear" class="gt_row gt_right">4</td>
+<td headers="carb" class="gt_row gt_right">1</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">21.5</td>
+<td headers="cyl" class="gt_row gt_right">4</td>
+<td headers="disp" class="gt_row gt_right">120.1</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">97</td>
+<td headers="drat" class="gt_row gt_right">3.70</td>
+<td headers="wt" class="gt_row gt_right">2.465</td>
+<td headers="qsec" class="gt_row gt_right">20.01</td>
+<td headers="vs" class="gt_row gt_right">1</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">3</td>
+<td headers="carb" class="gt_row gt_right">1</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">15.5</td>
+<td headers="cyl" class="gt_row gt_right">8</td>
+<td headers="disp" class="gt_row gt_right">318.0</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">150</td>
+<td headers="drat" class="gt_row gt_right">2.76</td>
+<td headers="wt" class="gt_row gt_right">3.520</td>
+<td headers="qsec" class="gt_row gt_right">16.87</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">3</td>
+<td headers="carb" class="gt_row gt_right">2</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">15.2</td>
+<td headers="cyl" class="gt_row gt_right">8</td>
+<td headers="disp" class="gt_row gt_right">304.0</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">150</td>
+<td headers="drat" class="gt_row gt_right">3.15</td>
+<td headers="wt" class="gt_row gt_right">3.435</td>
+<td headers="qsec" class="gt_row gt_right">17.30</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">3</td>
+<td headers="carb" class="gt_row gt_right">2</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">13.3</td>
+<td headers="cyl" class="gt_row gt_right">8</td>
+<td headers="disp" class="gt_row gt_right">350.0</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">245</td>
+<td headers="drat" class="gt_row gt_right">3.73</td>
+<td headers="wt" class="gt_row gt_right">3.840</td>
+<td headers="qsec" class="gt_row gt_right">15.41</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">3</td>
+<td headers="carb" class="gt_row gt_right">4</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">19.2</td>
+<td headers="cyl" class="gt_row gt_right">8</td>
+<td headers="disp" class="gt_row gt_right">400.0</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">175</td>
+<td headers="drat" class="gt_row gt_right">3.08</td>
+<td headers="wt" class="gt_row gt_right">3.845</td>
+<td headers="qsec" class="gt_row gt_right">17.05</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">0</td>
+<td headers="gear" class="gt_row gt_right">3</td>
+<td headers="carb" class="gt_row gt_right">2</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">27.3</td>
+<td headers="cyl" class="gt_row gt_right">4</td>
+<td headers="disp" class="gt_row gt_right">79.0</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">66</td>
+<td headers="drat" class="gt_row gt_right">4.08</td>
+<td headers="wt" class="gt_row gt_right">1.935</td>
+<td headers="qsec" class="gt_row gt_right">18.90</td>
+<td headers="vs" class="gt_row gt_right">1</td>
+<td headers="am" class="gt_row gt_right">1</td>
+<td headers="gear" class="gt_row gt_right">4</td>
+<td headers="carb" class="gt_row gt_right">1</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">26.0</td>
+<td headers="cyl" class="gt_row gt_right">4</td>
+<td headers="disp" class="gt_row gt_right">120.3</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">91</td>
+<td headers="drat" class="gt_row gt_right">4.43</td>
+<td headers="wt" class="gt_row gt_right">2.140</td>
+<td headers="qsec" class="gt_row gt_right">16.70</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">1</td>
+<td headers="gear" class="gt_row gt_right">5</td>
+<td headers="carb" class="gt_row gt_right">2</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">30.4</td>
+<td headers="cyl" class="gt_row gt_right">4</td>
+<td headers="disp" class="gt_row gt_right">95.1</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">113</td>
+<td headers="drat" class="gt_row gt_right">3.77</td>
+<td headers="wt" class="gt_row gt_right">1.513</td>
+<td headers="qsec" class="gt_row gt_right">16.90</td>
+<td headers="vs" class="gt_row gt_right">1</td>
+<td headers="am" class="gt_row gt_right">1</td>
+<td headers="gear" class="gt_row gt_right">5</td>
+<td headers="carb" class="gt_row gt_right">2</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">15.8</td>
+<td headers="cyl" class="gt_row gt_right">8</td>
+<td headers="disp" class="gt_row gt_right">351.0</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">264</td>
+<td headers="drat" class="gt_row gt_right">4.22</td>
+<td headers="wt" class="gt_row gt_right">3.170</td>
+<td headers="qsec" class="gt_row gt_right">14.50</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">1</td>
+<td headers="gear" class="gt_row gt_right">5</td>
+<td headers="carb" class="gt_row gt_right">4</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">19.7</td>
+<td headers="cyl" class="gt_row gt_right">6</td>
+<td headers="disp" class="gt_row gt_right">145.0</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">175</td>
+<td headers="drat" class="gt_row gt_right">3.62</td>
+<td headers="wt" class="gt_row gt_right">2.770</td>
+<td headers="qsec" class="gt_row gt_right">15.50</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">1</td>
+<td headers="gear" class="gt_row gt_right">5</td>
+<td headers="carb" class="gt_row gt_right">6</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">15.0</td>
+<td headers="cyl" class="gt_row gt_right">8</td>
+<td headers="disp" class="gt_row gt_right">301.0</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">335</td>
+<td headers="drat" class="gt_row gt_right">3.54</td>
+<td headers="wt" class="gt_row gt_right">3.570</td>
+<td headers="qsec" class="gt_row gt_right">14.60</td>
+<td headers="vs" class="gt_row gt_right">0</td>
+<td headers="am" class="gt_row gt_right">1</td>
+<td headers="gear" class="gt_row gt_right">5</td>
+<td headers="carb" class="gt_row gt_right">8</td></tr>
+    <tr><td headers="mpg" class="gt_row gt_right" style="background-color: #B2F7EF; font-weight: bold;">21.4</td>
+<td headers="cyl" class="gt_row gt_right">4</td>
+<td headers="disp" class="gt_row gt_right">121.0</td>
+<td headers="hp" class="gt_row gt_right" style="background-color: #FFEFB5; font-weight: bold;">109</td>
+<td headers="drat" class="gt_row gt_right">4.11</td>
+<td headers="wt" class="gt_row gt_right">2.780</td>
+<td headers="qsec" class="gt_row gt_right">18.60</td>
+<td headers="vs" class="gt_row gt_right">1</td>
+<td headers="am" class="gt_row gt_right">1</td>
+<td headers="gear" class="gt_row gt_right">4</td>
+<td headers="carb" class="gt_row gt_right">2</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
